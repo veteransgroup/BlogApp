@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block main %}
+<br>
+<h2>Welcome to <em>Django Blog</em> !</h2>
+<br> 
+<h3>A Django website prototype developed by <a
+    href="mailto:liubing009@gmail.com">Jeff</a>.</h3>
+<br>
+<h4>This page has been visited {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</h4>
+<br>
+<h6>Current time: {% now "jS F Y H:i" %}</h6>
+<br>
+
+
+
+<hr>
+<br>
+Visit <a href="https://www.linkedin.com/in/jeffliubing/">Jeff's Linkedin</a>
+
+{% endblock %}
