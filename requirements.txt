@@ -7,4 +7,5 @@ faker
 django-pure-pagination
 elasticsearch>=2,<3
 django-haystack
+psycopg2
 uwsgi
