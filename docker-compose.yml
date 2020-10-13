@@ -2,7 +2,7 @@ version: "3"
 
 services:
     db:
-        container_name: postgres
+        container_name: postgresblog
         image: postgres
         restart: always
         environment: 
@@ -10,9 +10,9 @@ services:
         volumes: 
             - blog_data:/var/lib/postgresql/data
     dj:
-        container_name: django
+        container_name: djangoblog
         build: .
-        image: dj:blog
+        image: djblog:blog
         restart: always
         working_dir: /BlogApp
         command: uwsgi --ini uwsgi.ini
@@ -22,7 +22,7 @@ services:
             - DJANGO_SETTINGS=dev
             - ENABLE_HAYSTACK_REALTIME_SIGNAL_PROCESSOR=no
     ng:
-        container_name: nginx
+        container_name: nginxblog
         build: 
             context: .
             dockerfile: ./Dockerfile_ng
