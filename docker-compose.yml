@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+    db:
+        container_name: postgres
+        image: postgres
+        restart: always
+        environment: 
+            - POSTGRES_PASSWORD=postgres
+        volumes: 
+            - blog_data:/var/lib/postgresql/data
+    dj:
+        container_name: django
+        build: .
+        image: dj:blog
+        restart: always
+        working_dir: /BlogApp
+        command: uwsgi --ini uwsgi.ini
+        depends_on:
+            - db
+        environment: 
+            - DJANGO_SETTINGS=dev
+            - ENABLE_HAYSTACK_REALTIME_SIGNAL_PROCESSOR=no
+    ng:
+        container_name: nginx
+        build: 
+            context: .
+            dockerfile: ./Dockerfile_ng
+        restart: always
+        ports: 
+            - "80:80"
+        depends_on: 
+            - dj
+
+volumes: 
+    blog_data:
+
+        
