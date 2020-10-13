@@ -16,9 +16,10 @@ services:
         command: uwsgi --ini uwsgi.ini
         depends_on:
             - db
+            - elasticsearch
         environment: 
             - DJANGO_SETTINGS=dev
-            - ENABLE_HAYSTACK_REALTIME_SIGNAL_PROCESSOR=no
+            # - ENABLE_HAYSTACK_REALTIME_SIGNAL_PROCESSOR=no
     ng:
         container_name: nginxblog
         build: 
@@ -28,8 +29,27 @@ services:
             - "80:80"
         depends_on: 
             - dj
-
+    elasticsearch:
+        build:
+            context: .
+            dockerfile: Dockerfile_search
+        image: blog_app_elasticsearch
+        container_name: blog_app_elasticsearch
+        volumes:
+            - esdata:/usr/share/elasticsearch/data
+        ports:
+            - "9200:9200"
+        environment:
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        ulimits:
+            memlock:
+            soft: -1
+            hard: -1
+            nproc: 65536
+            nofile:
+            soft: 65536
+            hard: 65536
 volumes: 
     blog_data:
-
+    esdata:
         

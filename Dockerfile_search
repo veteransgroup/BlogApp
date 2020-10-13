@@ -1,0 +1,10 @@
+FROM elasticsearch
+
+ADD https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.9.2/elasticsearch-analysis-ik-7.9.2.zip /usr/share/elasticsearch/plugins/
+RUN cd /usr/share/elasticsearch/plugins/ && mkdir ik && unzip elasticsearch-analysis-ik-7.9.2.zip -d ik/
+RUN rm /usr/share/elasticsearch/plugins/elasticsearch-analysis-ik-7.9.2.zip
+
+COPY --from=djblog:blog /BlogApp/compose/production/elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/
+RUN chown elasticsearch:elasticsearch /usr/share/elasticsearch/config/elasticsearch.yml
+
+USER elasticsearch
