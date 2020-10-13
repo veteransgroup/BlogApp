@@ -4,7 +4,6 @@ services:
     db:
         container_name: postgresblog
         image: postgres
-        restart: always
         environment: 
             - POSTGRES_PASSWORD=postgres
         volumes: 
@@ -13,7 +12,6 @@ services:
         container_name: djangoblog
         build: .
         image: djblog:blog
-        restart: always
         working_dir: /BlogApp
         command: uwsgi --ini uwsgi.ini
         depends_on:
@@ -26,7 +24,6 @@ services:
         build: 
             context: .
             dockerfile: ./Dockerfile_ng
-        restart: always
         ports: 
             - "80:80"
         depends_on: 
