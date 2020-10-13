@@ -1,6 +1,6 @@
 from .common import *
 
-SECRET_KEY = 'ynx!of6i^l)fg4mrxq-151b&q^kn%4c!26v=-0+zzg1l)=g&e)'
+SECRET_KEY = '2wqrfhw5xa4v$)9=894wmxi^&$hf)8dw#pz)ja0l#5%+u$qcqc'
 
 DEBUG = True
 
