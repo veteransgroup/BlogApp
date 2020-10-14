@@ -40,8 +40,8 @@ class Category(models.Model):
     name = models.CharField("Classified name", max_length=100)
 
     class Meta:
-        verbose_name = "Categories"
-        verbose_name_plural = verbose_name
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
 
     def __str__(self):
         return self.name
@@ -57,7 +57,7 @@ class Tag(models.Model):
 
     class Meta:
         verbose_name = "Tag"
-        verbose_name_plural = verbose_name
+        verbose_name_plural = "Tags"
 
     def __str__(self):
         return self.name
@@ -106,7 +106,7 @@ class Post(models.Model):
 
     class Meta:
         verbose_name = "Article"
-        verbose_name_plural = verbose_name
+        verbose_name_plural = "Articles"
         ordering = ["-created_time"]
 
     def __str__(self):

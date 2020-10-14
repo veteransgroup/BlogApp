@@ -4,6 +4,7 @@ services:
     db:
         container_name: postgresblog
         image: postgres
+        restart: always
         environment: 
             - POSTGRES_PASSWORD=postgres
         volumes: 
@@ -14,6 +15,7 @@ services:
         image: djblog:blog
         working_dir: /BlogApp
         command: uwsgi --ini uwsgi.ini
+        restart: always
         depends_on:
             - db
             - elasticsearch
@@ -25,6 +27,7 @@ services:
         build: 
             context: .
             dockerfile: ./Dockerfile_ng
+        restart: always
         ports: 
             - "80:80"
         depends_on: 
@@ -36,10 +39,11 @@ services:
         image: blog_app_elasticsearch
         container_name: blog_app_elasticsearch
         # command: ['sysctl', '-w', 'vm.max_map_count=262144']
+        restart: always
         volumes:
             - esdata:/usr/share/elasticsearch/data
-        ports:
-            - "9200:9200"
+        # ports:
+            # - "9200:9200"
         environment:
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         ulimits:

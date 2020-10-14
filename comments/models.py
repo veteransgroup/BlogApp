@@ -12,7 +12,7 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name = 'Comment'
-        verbose_name_plural = verbose_name
+        verbose_name_plural = 'Comments'
         ordering = ['-created_time']
 
     def __str__(self):
